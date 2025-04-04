@@ -44,6 +44,25 @@ const addPost = (req, res) => {
     });
 };
 
+const getPost = (req, res) => {
+  postModel
+    .findById(req.params.postId)
+    .then((post) => {
+      if (!post) {
+        res.status(404).render('404-page');
+      }
+      res.render('one-post-page', {
+        post,
+        nameErr: null,
+        postErr: null,
+      });
+    })
+    .catch((err) => {
+      console.error('Searching error:', err);
+      res.status(500).send('Internal Server Error');
+    });
+};
+
 const notFoundPage = (req, res) => {
   res.status(404).render('404-page', {
     nameErr: null,
@@ -55,5 +74,6 @@ module.exports = {
   redirectHomePage,
   homePage,
   addPost,
+  getPost,
   notFoundPage,
 };

@@ -6,6 +6,7 @@ const route = express.Router();
 route.get('/', postController.redirectHomePage);
 route.get('/feed', postController.homePage);
 route.post('/new/post', postController.addPost);
+route.get('/post/:postId', postController.getPost);
 
 //404 route
 route.use(postController.notFoundPage);
