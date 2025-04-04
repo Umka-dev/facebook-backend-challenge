@@ -34,7 +34,6 @@
             type="text"
             placeholder="Type your name..."
             class="mb-3"
-            required
           />
           <div class="d-flex flex-column justify-content-center">
             <% if(nameErr){%>
@@ -43,12 +42,11 @@
           </div>
 
           <textarea
-            name="article"
+            name="message"
             placeholder="Type your message there..."
             cols="45"
             rows="5"
             class="mb-3"
-            required
           ></textarea>
           <div class="d-flex flex-column justify-content-center">
             <% if(postErr){%>
@@ -66,13 +64,15 @@
         <h2 class="fs-2 mb-4"><%= post.name %></h2>
 
         <div class="d-flex flex-row justify-content-between">
-          <p class="me-4 mb-3"><%= post.message %></p>
-          <a
-            href="/post/<%= post._id %>"
-            class="link-dark link-offset-2 link-underline link-underline-opacity-0"
+          <div class="d-flex flex-column">
+            <p class="me-4 mb-2"><%= post.message %></p>
+            <p class="me-4 mb-3">
+              <%= new Date(post.createdAt).toLocaleDateString() %>
+            </p>
+          </div>
+          <a href="/post/<%= post._id %>" class="link-offset-2 link-underline"
             >See more</a
           >
-          <p class="me-4 mb-3"><%= post.createdAt %></p>
         </div>
         <% }) %> <% } else { %>
         <p class="me-4 mb-3">Here is no any posts so far...</p>
