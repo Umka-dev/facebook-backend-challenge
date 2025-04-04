@@ -1,9 +1,5 @@
 const postModel = require('../models/post-model');
 
-const redirectHomePage = (req, res) => {
-  res.redirect('/feed');
-};
-
 const homePage = (req, res) => {
   postModel
     .find()
@@ -45,6 +41,7 @@ const addPost = (req, res) => {
 };
 
 const getPost = (req, res) => {
+  // console.log('req.params.postId', req.params.postId);
   postModel
     .findById(req.params.postId)
     .then((post) => {
@@ -98,7 +95,7 @@ const editPost = (req, res) => {
         return res.status(404).render('404-page');
       }
       console.log('Post successfully updated:', updatedPost);
-      res.redirect('/');
+      res.redirect('/feed');
     })
     // Handle saving changes and validation errors
     .catch((err) => {
@@ -146,7 +143,6 @@ const notFoundPage = (req, res) => {
 };
 
 module.exports = {
-  redirectHomePage,
   homePage,
   addPost,
   getPost,

@@ -11,7 +11,7 @@
         class="d-flex flex-row align-items-center justify-content-center mb-2 p-1 w-100"
       >
         <a
-          href="/feed"
+          href="/"
           class="link-dark link-offset-2 link-underline link-underline-opacity-0"
           ><h1 class="fs-3 fw-bold mt-4 mb-4">Welcome To Facebook</h1></a
         >
@@ -24,7 +24,7 @@
       <div class="d-flex flex-column align-items-center">
         <h2 class="fs-4 mb-4">Add a post</h2>
         <form
-          action="/new/post"
+          action="/feed/new/post"
           method="POST"
           class="d-flex flex-column justify-content-center mb-5"
           style="max-width: 450px"
@@ -70,7 +70,9 @@
               <%= new Date(post.createdAt).toLocaleDateString() %>
             </p>
           </div>
-          <a href="/post/<%= post._id %>" class="link-offset-2 link-underline"
+          <a
+            href="/feed/post/<%= post._id %>"
+            class="link-offset-2 link-underline"
             >See more</a
           >
         </div>

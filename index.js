@@ -8,8 +8,11 @@ app.set('view engine', 'ejs'); // Set ejs as a view engine
 app.use(express.urlencoded({ extended: true })); //Accept JSON in the request
 app.use(express.json()); // Accept express to use JSON in the response
 
-// Use browser routes defined in config/routes.js
-app.use('/', publicRoutes);
+app.get('/', (req, res) => {
+  res.redirect('/feed');
+});
+
+app.use('/feed', publicRoutes);
 
 // Start the server
 const PORT = 3300;
