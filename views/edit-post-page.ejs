@@ -20,11 +20,11 @@
 
     <!-- Main content section -->
     <main class="container flex-grow-1">
-      <!-- Create a new post form -->
+      <!-- Edit form -->
       <div class="d-flex flex-column align-items-center">
-        <h2 class="fs-4 mb-4">Add a post</h2>
+        <h2 class="fs-4 mb-4">Edit the post</h2>
         <form
-          action="/new/post"
+          action="/feed/edit/<%= post._id %>"
           method="POST"
           class="d-flex flex-column justify-content-center mb-5"
           style="max-width: 450px"
@@ -32,7 +32,8 @@
           <input
             name="name"
             type="text"
-            placeholder="Type your name..."
+            placeholder="Type your name there..."
+            value="<%=post.name%>"
             class="mb-3"
           />
           <div class="d-flex flex-column justify-content-center">
@@ -47,39 +48,15 @@
             cols="45"
             rows="1"
             class="mb-3"
-          ></textarea>
+          ><%= post.message %></textarea>
           <div class="d-flex flex-column justify-content-center">
             <% if(postErr){%>
             <p class="text-danger"><%= postErr %></p>
             <% } %>
           </div>
-          <button class="btn btn-outline-primary">Submit</button>
+          <button class="btn btn-outline-primary">Save</button>
         </form>
       </div>
-
-      <!-- Display posts -->
-      <div>
-        <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
-
-        <h2 class="fs-2 mb-4"><%= post.name %></h2>
-
-        <div class="d-flex flex-row justify-content-between">
-          <div class="d-flex flex-column">
-            <p class="me-4 mb-2"><%= post.message %></p>
-            <p class="me-4 mb-3">
-              <%= new Date(post.createdAt).toLocaleDateString() %>
-            </p>
-          </div>
-          <a href="/post/<%= post._id %>" class="link-offset-2 link-underline"
-            >See more</a
-          >
-        </div>
-        <% }) %> <% } else { %>
-        <p class="me-4 mb-3">Here is no any posts so far...</p>
-        <% } %>
-      </div>
-      <!-- End of posts -->
-    </main>
 
     <!-- Footer section -->
     <%- include('./partials/footer') %>

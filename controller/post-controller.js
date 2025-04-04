@@ -63,6 +63,63 @@ const getPost = (req, res) => {
     });
 };
 
+const renderEditForm = (req, res) => {
+  const postId = req.params.postId;
+  postModel
+    .findById(postId)
+    .then((post) => {
+      res.render('edit-post-page', {
+        post,
+        nameErr: null,
+        postErr: null,
+      });
+    })
+    .catch((err) => {
+      console.error('Error:', err);
+    });
+};
+
+const editPost = (req, res) => {
+  const postId = req.params.postId;
+  const updatedData = req.body;
+
+  console.log('Editing article with ID:', postId);
+  console.log('updatedData:', updatedData);
+
+  if (!postId) {
+    return res.status(404).render('404-page');
+  }
+
+  postModel
+    .findByIdAndUpdate(postId, req.body, { new: true, runValidators: true })
+    .then((updatedPost) => {
+      if (!updatedPost) {
+        console.log('Post not found after update:', postId);
+        return res.status(404).render('404-page');
+      }
+      console.log('Post successfully updated:', updatedPost);
+      res.redirect('/');
+    })
+    // Handle saving changes and validation errors
+    .catch((err) => {
+      // console.log('ERROR MESSAGE: ', err);
+      if (err.errors?.name || err.errors?.message) {
+        return res.render('edit-post-page', {
+          post: { ...req.body, _id: postId },
+          nameErr: err.errors.name ? err.errors.name : null,
+          postErr: err.errors.message ? err.errors.message : null,
+          savingErr: null,
+        });
+      }
+      res.render('edit-post-page', {
+        post,
+        titleErr: null,
+        articleErr: null,
+        savingErr: 'Error saving post',
+      });
+    });
+};
+
 const deletePost = (req, res) => {
   const postId = req.params.postId;
 
@@ -93,6 +150,8 @@ module.exports = {
   homePage,
   addPost,
   getPost,
+  renderEditForm,
+  editPost,
   deletePost,
   notFoundPage,
 };
