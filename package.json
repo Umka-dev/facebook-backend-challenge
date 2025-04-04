@@ -1,0 +1,29 @@
+{
+  "name": "facebook-backend-challenge",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Umka-dev/facebook-backend-challenge.git"
+  },
+  "author": "umka-dev",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Umka-dev/facebook-backend-challenge/issues"
+  },
+  "homepage": "https://github.com/Umka-dev/facebook-backend-challenge#readme",
+  "description": "",
+  "dependencies": {
+    "ejs": "^3.1.10",
+    "express": "^5.1.0",
+    "mongoose": "^8.13.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
+  }
+}

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <%- include('./partials/head') %>
+  <body
+    class="container-fluid d-flex flex-column justify-content-start min-vh-100 bg-light text-black"
+    style="max-width: 900px"
+  >
+    <!-- Header section -->
+    <header>
+      <nav
+        class="d-flex flex-row align-items-center justify-content-between mb-2 p-1 w-100"
+      >
+        <a
+          href="/"
+          class="link-dark link-offset-2 link-underline link-underline-opacity-0"
+          ><h1 class="fs-3 fw-bold mt-4 mb-4">Welcome To Facebook</h1></a
+        >
+      </nav>
+    </header>
+
+    <!-- Main content section -->
+    <main class="container flex-grow-1">
+      <!-- Create a new article form -->
+      <div class="d-flex flex-column align-items-center">
+        <h2 class="fs-4 mb-4">Add a post</h2>
+        <form
+          action="/new/post"
+          method="POST"
+          class="d-flex flex-column justify-content-center mb-5"
+          style="max-width: 450px"
+        >
+          <input
+            name="name"
+            type="text"
+            placeholder="Type your name..."
+            class="mb-3"
+            required
+          />
+          <div class="d-flex flex-column justify-content-center">
+            <% if(nameErr){%>
+            <p class="text-danger"><%= nameErr %></p>
+            <% } %>
+          </div>
+
+          <textarea
+            name="article"
+            placeholder="Type your message there..."
+            cols="45"
+            rows="5"
+            class="mb-3"
+            required
+          ></textarea>
+          <div class="d-flex flex-column justify-content-center">
+            <% if(postErr){%>
+            <p class="text-danger"><%= postErr %></p>
+            <% } %>
+          </div>
+          <button class="btn btn-outline-primary">Submit</button>
+        </form>
+      </div>
+
+      <!-- Display posts -->
+      <div>
+        <% if (posts.length > 0) { %> <% posts.forEach(post => { %>
+
+        <h2 class="fs-2 mb-4"><%= post.name %></h2>
+
+        <div class="d-flex flex-row justify-content-between">
+          <p class="me-4 mb-3"><%= post.message %></p>
+          <a
+            href="/post/<%= post._id %>"
+            class="link-dark link-offset-2 link-underline link-underline-opacity-0"
+            >See more</a
+          >
+          <p class="me-4 mb-3"><%= post.createdAt %></p>
+        </div>
+        <% }) %> <% } else { %>
+        <p class="me-4 mb-3">Here is no any posts so far...</p>
+        <% } %>
+      </div>
+      <!-- End of posts -->
+    </main>
+
+    <!-- Footer section -->
+    <%- include('./partials/footer') %>
+  </body>
+</html>
