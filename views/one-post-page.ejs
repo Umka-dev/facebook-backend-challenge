@@ -34,6 +34,22 @@
           <% } %>
         </div>
       </div>
+
+      <div class="d-flex flex-row align-items-center justify-content-end mb-2">
+        <!-- Delete button -->
+        <form action="/delete/post/<%= post._id %>" method="POST">
+          <button class="btn btn-outline-danger me-3">Delete</button>
+        </form>
+
+        <!-- Edit button -->
+        <button class="btn btn-outline-success">
+          <a
+            href="/edit/post/<%= post._id %>"
+            class="link-offset-2 link-success link-underline link-underline-opacity-0"
+            >Edit post</a
+          >
+        </button>
+      </div>
     </main>
 
     <!-- Footer section -->

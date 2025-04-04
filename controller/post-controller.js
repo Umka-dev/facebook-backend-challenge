@@ -63,6 +63,24 @@ const getPost = (req, res) => {
     });
 };
 
+const deletePost = (req, res) => {
+  const postId = req.params.postId;
+
+  postModel
+    .findByIdAndDelete(postId)
+    .then((deletedPost) => {
+      if (!deletedPost) {
+        return res.status(404).send('Post not found');
+      }
+      console.log('Post was deleted');
+      res.redirect('/feed');
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send('Internal Server Error');
+    });
+};
+
 const notFoundPage = (req, res) => {
   res.status(404).render('404-page', {
     nameErr: null,
@@ -75,5 +93,6 @@ module.exports = {
   homePage,
   addPost,
   getPost,
+  deletePost,
   notFoundPage,
 };
