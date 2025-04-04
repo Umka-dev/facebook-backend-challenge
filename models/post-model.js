@@ -8,7 +8,7 @@ const FEED = new mongoose.Schema({
   },
   message: {
     type: String,
-    maxlength: [40, 'Message field must be no longer than 40 character'],
+    maxlength: [40, 'Message field must be no longer than 40 characters'],
     required: [true, 'The "Message" field is required.'],
   },
   createdAt: {

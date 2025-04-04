@@ -80,7 +80,7 @@ const editPost = (req, res) => {
   const postId = req.params.postId;
   const updatedData = req.body;
 
-  console.log('Editing article with ID:', postId);
+  console.log('Editing post with ID:', postId);
   console.log('updatedData:', updatedData);
 
   if (!postId) {
@@ -105,14 +105,12 @@ const editPost = (req, res) => {
           post: { ...req.body, _id: postId },
           nameErr: err.errors.name ? err.errors.name : null,
           postErr: err.errors.message ? err.errors.message : null,
-          savingErr: null,
         });
       }
       res.render('edit-post-page', {
         post,
-        titleErr: null,
-        articleErr: null,
-        savingErr: 'Error saving post',
+        nameErr: null,
+        postErr: null,
       });
     });
 };
